@@ -30,6 +30,6 @@ public class EstadoServiceImpl implements EstadoService {
     public Estado buscaPorId(String id) {
         return Optional.ofNullable(this.estadoRepository.findOne(id))
                 .orElseThrow(() -> new EstadoNotFoundException
-                        (String.format("%s%s%s", "Estado de id", id, "não encontrado")));
+                        (String.format("%s%s%s", "Estado de id ", id, " não encontrado")));
     }
 }

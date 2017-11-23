@@ -14,7 +14,7 @@ public interface ReclamacaoRequestMapper {
     @Mappings(value = {
             @Mapping(source = "titulo", target = "titulo"),
             @Mapping(source = "descricao", target = "descricao"),
-            @Mapping(source = "local", target = "estado.id"),
+            @Mapping(source = "idEstado", target = "estado.id"),
             @Mapping(source = "nomeEmpresa", target = "empresa.nome"),
     })
     Reclamacao parse(ReclamacaoRequest reclamacaoRequest);

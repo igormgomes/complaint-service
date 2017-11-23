@@ -63,4 +63,13 @@ public interface ReclamacaoResource {
     @ApiOperation(value = "Edita uma reclamação")
     @PutMapping(value = "/{id}")
     ResponseEntity edita (ReclamacaoRequest reclamacaoRequest, String id);
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 202, message = "Accept"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
+    @ApiOperation(value = "Busca as reclamações de uma empresa e estado")
+    @GetMapping(value = "/empresa/{id-empresa}/estado/{id-estado}")
+    ResponseEntity buscaPorEmpresaEstado (String idEmpresa, String idEstado);
 }

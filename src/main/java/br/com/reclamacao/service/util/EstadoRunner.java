@@ -11,7 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReclamacaoRunner implements ApplicationRunner {
+public class EstadoRunner implements ApplicationRunner {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

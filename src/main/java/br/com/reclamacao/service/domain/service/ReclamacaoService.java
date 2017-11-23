@@ -15,4 +15,6 @@ public interface ReclamacaoService {
     void edita(Reclamacao reclamacao, String id);
 
     Reclamacao buscaPorId(String id);
+
+    Set<Reclamacao> buscaPorEmpresaEstado(String idEmpresa, String idEstado);
 }

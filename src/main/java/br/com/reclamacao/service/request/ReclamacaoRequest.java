@@ -18,9 +18,9 @@ public class ReclamacaoRequest {
     private String descricao;
 
 
-    @NotEmpty(message = "Local deve estar preenchido")
-    @ApiModelProperty(value = "Local da reclamação", required = true, dataType = "String")
-    private String local;
+    @NotEmpty(message = "Id do estado deve estar preenchido")
+    @ApiModelProperty(value = "Id do local de estado da reclamação", required = true, dataType = "String")
+    private String idEstado;
 
 
     @NotEmpty(message = "Nome da empresa deve estar preenchido")
@@ -43,12 +43,12 @@ public class ReclamacaoRequest {
         this.descricao = descricao;
     }
 
-    public String getLocal() {
-        return local;
+    public void setIdEstado(String idEstado) {
+        this.idEstado = idEstado;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public String getIdEstado() {
+        return idEstado;
     }
 
     public String getNomeEmpresa() {

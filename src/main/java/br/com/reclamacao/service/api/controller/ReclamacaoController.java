@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.net.URI;
 import java.util.Set;
 
@@ -57,5 +58,12 @@ public class ReclamacaoController implements ReclamacaoResource {
     public ResponseEntity edita(@Valid @RequestBody ReclamacaoRequest reclamacaoRequest, @PathVariable("id") String id) {
         this.reclamacaoService.edita(this.reclamacaoRequestMapper.parse(reclamacaoRequest), id);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity buscaPorEmpresaEstado(@PathVariable("id-empresa") String idEmpresa,
+                                                @PathVariable("id-estado")String idEstado) {
+        Set<Reclamacao> reclamacoes = this.reclamacaoService.buscaPorEmpresaEstado(idEmpresa, idEstado);
+        return ResponseEntity.ok(reclamacoes);
     }
 }
