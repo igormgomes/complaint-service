@@ -4,7 +4,6 @@ import br.com.reclamacao.service.domain.repository.EstadoRepository;
 import br.com.reclamacao.service.domain.service.EstadoService;
 import br.com.reclamacao.service.domain.service.impl.EstadoServiceImpl;
 import br.com.reclamacao.service.exception.NotFoundException;
-import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
