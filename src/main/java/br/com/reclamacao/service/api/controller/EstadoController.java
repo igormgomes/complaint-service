@@ -1,7 +1,7 @@
 package br.com.reclamacao.service.api.controller;
 
-import br.com.reclamacao.service.domain.model.Estado;
 import br.com.reclamacao.service.api.EstadoResource;
+import br.com.reclamacao.service.domain.model.Estado;
 import br.com.reclamacao.service.domain.service.EstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
