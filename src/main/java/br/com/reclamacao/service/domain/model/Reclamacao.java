@@ -18,6 +18,12 @@ public class Reclamacao {
 
     private Empresa empresa;
 
+    public Reclamacao () {}
+
+    public Reclamacao(String titulo) {
+        this.titulo = titulo;
+    }
+
     public String getId() {
         return id;
     }

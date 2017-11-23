@@ -13,7 +13,7 @@ mvn spring-boot:run
 mvn clean package docker:build
 ```
 ```
-docker run -p 8090:8090 reclamacao-service
+docker run -p 8080:8080 reclamacao-service
 ```
 
 Acesse o swagger para usar as api's http://localhost:8080/swagger-ui.html.
