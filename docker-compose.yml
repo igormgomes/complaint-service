@@ -1,0 +1,21 @@
+version: '3'
+services:
+  reclamacaoservice:
+    image: reclamacao-service
+    ports:
+      - 8080:8080
+    networks:
+      - production-network
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - production-network
+
+networks:
+  production-network:
+    driver: "bridge"
