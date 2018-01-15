@@ -5,7 +5,7 @@ services:
     ports:
       - 8080:8080
     networks:
-      - production-network
+      - desenv-network
     depends_on:
       - mongodb
 
@@ -14,8 +14,8 @@ services:
     ports:
       - 27017:27017
     networks:
-      - production-network
+      - desenv-network
 
 networks:
-  production-network:
+  desenv-network:
     driver: "bridge"
