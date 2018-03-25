@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      database: reclamacao
+      database: complaint
       port: 27017
       host: mongodb
 logging:

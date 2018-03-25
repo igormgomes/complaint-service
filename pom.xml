@@ -4,12 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com</groupId>
-	<artifactId>reclamacao-service</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<artifactId>complaint-service</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>reclama-service</name>
-	<description>Demo project for Spring Boot</description>
+	<name>complaint-service</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -174,7 +173,7 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.4.13</version>
 				<configuration>
-					<imageName>reclamacao-service</imageName>
+					<imageName>complaint-service</imageName>
 					<baseImage>avinb/jdk8-64:latest</baseImage>
 					<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
 					<exposes>8080</exposes>

@@ -1,7 +1,7 @@
 version: '3'
 services:
-  reclamacaoservice:
-    image: reclamacao-service
+  complaintservice:
+    image: complaint-service
     ports:
       - 8080:8080
     networks:
