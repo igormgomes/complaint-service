@@ -1,19 +1,21 @@
-### Arquitetura
+### Architecture
 
-A aplicação foi desenvolvida em [Spring boot](https://projects.spring.io/spring-boot/) usando alguns dos seus starters (WEB, MONGO), os dados estão sendo salvos usando o [Mongodb](https://www.mongodb.com), os testes foram desenvolvidos usando a nova versão do [JUnit](http://junit.org/junit5/) e a documentação para uso das api's foi utilizado o [Swagger](https://swagger.io/).
+The application was developed in  [Spring boot](https://projects.spring.io/spring-boot/)  
+data is being saved using [Mongodb](https://www.mongodb.com), 
+the tests were developed using version 5 of  [JUnit](http://junit.org/junit5/) 
+and documentation for use of api's was used [Swagger](https://swagger.io/).
 
-### Subindo a aplicação
+### Running application
 
 ```
 mvn spring-boot:run
 ```
 
-### Subindo a aplicação com Docker
+### Running application with docker
 ```
 mvn clean package docker:build
 ```
 ```
 docker-compose up
 ```
-
-Acesse o swagger para usar as api's http://localhost:8080/swagger-ui.html.
+Access the o swagger http://localhost:8080/swagger-ui.html.
