@@ -113,8 +113,7 @@ public class ComplaintServiceTest {
     }
 
     @Test
-    @DisplayName("Testa que é lançada uma exception caso nao volte elementos na lista")
-    public void testaQueEhLancadaUmaExceptionCasoNaoVolteElementosNaListaNaBuscaPorEstadoEEmpresa() {
+    public void shouldThrowNotFoundException() {
         when(this.complaintRepository.findByCompany_IdAndAndState_Id(anyString(), anyString()))
                 .thenReturn(Sets.newHashSet());
 
