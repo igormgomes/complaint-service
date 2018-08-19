@@ -37,8 +37,8 @@ public class ComplaintController implements ComplaintResource {
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity find() {
-        Set<Complaint> reclamacoes = this.complaintService.find();
-        return ResponseEntity.ok(reclamacoes);
+        Set<Complaint> complaints = this.complaintService.find();
+        return ResponseEntity.ok(complaints);
     }
 
     @Override
