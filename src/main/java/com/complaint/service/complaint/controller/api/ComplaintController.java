@@ -2,9 +2,9 @@ package com.complaint.service.complaint.controller.api;
 
 import com.complaint.service.complaint.controller.ComplaintResource;
 import com.complaint.service.complaint.model.Complaint;
-import com.complaint.service.complaint.service.ComplaintService;
 import com.complaint.service.complaint.request.ComplaintRequest;
 import com.complaint.service.complaint.request.ComplaintRequestMapper;
+import com.complaint.service.complaint.service.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
