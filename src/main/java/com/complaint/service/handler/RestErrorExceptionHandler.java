@@ -42,7 +42,7 @@ public class RestErrorExceptionHandler extends ResponseEntityExceptionHandler {
             message = exception.getValue();
         }
 
-        ErrorMessage errorMessage = new ErrorMessage("Not is possible to do convert of the value " + message);
+        ErrorMessage errorMessage = new ErrorMessage("Is not possible convert of the value " + message);
         return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
