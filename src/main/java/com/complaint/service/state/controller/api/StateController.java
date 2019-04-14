@@ -3,7 +3,6 @@ package com.complaint.service.state.controller.api;
 import com.complaint.service.state.controller.StateResource;
 import com.complaint.service.state.model.State;
 import com.complaint.service.state.service.StateService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +16,8 @@ import java.util.Set;
 @RequestMapping("state")
 public class StateController implements StateResource {
 
-    private StateService stateService;
+    private final StateService stateService;
 
-    @Autowired
     public StateController(StateService stateService) {
         this.stateService = stateService;
     }

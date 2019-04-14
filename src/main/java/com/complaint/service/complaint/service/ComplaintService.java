@@ -9,7 +9,7 @@ public interface ComplaintService {
 
     Complaint save(Complaint complaint);
 
-    Set<Complaint> find();
+    Set<Complaint> find(String stateId, String companyName);
 
     void delete(String id);
 

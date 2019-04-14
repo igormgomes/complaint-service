@@ -42,11 +42,8 @@ public class StateServiceTest {
     @Test
     @DisplayName("Should throw StateNotFoundException in find all")
     public void shouldTestFindAll() {
-        State state = new State();
-        state.setId("1");
-        state.setName("SP");
         when(this.stateRepository.findAll())
-                .thenReturn(Lists.newArrayList(state));
+                .thenReturn(Lists.newArrayList(getState()));
 
         Set<State> states = this.stateService.findAll();
 
@@ -65,15 +62,19 @@ public class StateServiceTest {
     @Test
     @DisplayName("Should test find")
     public void shouldTestFind() {
-        State state = new State();
-        state.setId("1");
-        state.setName("SP");
         when(this.stateRepository.findById(anyString()))
-                .thenReturn(Optional.of(state));
+                .thenReturn(Optional.of(getState()));
 
         State stateFind = this.stateService.findById("SP");
 
         assertEquals("1", stateFind.getId());
         assertEquals("SP", stateFind.getName());
+    }
+
+    private State getState() {
+        return State.builder()
+                .id("1")
+                .name("SP")
+                .build();
     }
 }

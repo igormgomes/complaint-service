@@ -24,8 +24,8 @@ public interface ComplaintResource {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @ApiOperation(value = "Find all complaint")
-    ResponseEntity find();
+    @ApiOperation(value = "Find all complaint or find by state id and company name")
+    ResponseEntity find(String stateId, String companyName);
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Ok"),
@@ -51,4 +51,5 @@ public interface ComplaintResource {
     })
     @ApiOperation(value = "Update complaint")
     ResponseEntity update(ComplaintRequest complaintRequest, String id);
+
 }

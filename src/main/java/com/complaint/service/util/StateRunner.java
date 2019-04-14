@@ -3,31 +3,40 @@ package com.complaint.service.util;
 import com.complaint.service.state.model.State;
 import com.complaint.service.state.repository.StateRepository;
 import com.google.common.collect.Lists;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class StateRunner implements ApplicationRunner {
 
-    @Autowired
-    private StateRepository stateRepository;
+    private final StateRepository stateRepository;
+
+    public StateRunner(StateRepository stateRepository) {
+        this.stateRepository = stateRepository;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        if(stateRepository.findAll().isEmpty()){
-            State ac = new State();
-            ac.setName("AC");
+        List<State> states = this.stateRepository.findAll();
+        if (states.isEmpty()) {
+            State ac = State.builder()
+                    .name("AC")
+                    .build();
 
-            State rs = new State();
-            rs.setName("RS");
+            State rs = State.builder()
+                    .name("RS")
+                    .build();
 
-            State sp = new State();
-            sp.setName("SP");
+            State sp = State.builder()
+                    .name("SP")
+                    .build();
 
-            State to = new State();
-            to.setName("TO");
+            State to = State.builder()
+                    .name("TO")
+                    .build();
 
             this.stateRepository.saveAll(Lists.newArrayList(ac, rs, sp, to));
         }

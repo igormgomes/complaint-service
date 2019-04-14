@@ -1,8 +1,12 @@
 package com.complaint.service.state.model;
 
+import lombok.Builder;
+import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Builder
+@Getter
 @Document(collection = "State")
 public class State {
 
@@ -10,19 +14,4 @@ public class State {
     private String id;
     private String name;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

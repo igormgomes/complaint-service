@@ -5,7 +5,10 @@ import com.complaint.service.complaint.exception.ComplaintPreConditionException;
 import com.complaint.service.complaint.model.Complaint;
 import com.complaint.service.complaint.repository.ComplaintRepository;
 import com.complaint.service.complaint.service.ComplaintService;
+import com.complaint.service.state.model.State;
+import com.complaint.service.state.service.StateService;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,16 +22,32 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
-@DisplayName("Test of the complaint service")
+@DisplayName("Complaint service test")
 public class ComplaintServiceTest {
 
     private ComplaintRepository complaintRepository;
+    private StateService stateService;
+
     private ComplaintService complaintService;
 
     @BeforeEach
     public void beforeEach () {
         this.complaintRepository = mock(ComplaintRepository.class);
-        this.complaintService = new ComplaintServiceImpl(this.complaintRepository);
+        this.stateService = mock(StateService.class);
+        this.complaintService = new ComplaintServiceImpl(this.complaintRepository, this.stateService);
+    }
+
+    @Test
+    @DisplayName("Should test save")
+    public void shouldTestSave() {
+        when(this.stateService.findById(anyString()))
+                .thenReturn(getState());
+        when(this.complaintRepository.save(any()))
+                .thenReturn(getComplaint());
+
+        this.complaintService.save(getComplaint());
+
+        verify(this.complaintRepository, atLeastOnce()).save(any());
     }
 
     @Test
@@ -37,16 +56,38 @@ public class ComplaintServiceTest {
         when(this.complaintRepository.findAll())
                 .thenReturn(Lists.newArrayList());
 
-        assertThrows(ComplaintNotFoundException.class, () -> this.complaintService.find());
+        assertThrows(ComplaintNotFoundException.class, () -> this.complaintService.find("", ""));
+    }
+
+    @Test
+    @DisplayName("Should throw ComplaintNotFoundException in find with state id and company name")
+    public void shouldThrowComplaintNotFoundExceptionInFindWithStateIdAndCompanyName() {
+        when(this.complaintRepository.findAllByStateAndCompanyName(any(), anyString()))
+                .thenReturn(Sets.newHashSet());
+
+        assertThrows(ComplaintNotFoundException.class, () -> this.complaintService.find("1", "reclame"));
     }
 
     @Test
     @DisplayName("Should test findAll all")
     public void shouldTestFindAll () {
         when(this.complaintRepository.findAll())
-                .thenReturn(Lists.newArrayList(new Complaint()));
+                .thenReturn(Lists.newArrayList(getComplaint()));
 
-        Set<Complaint> complaints = this.complaintService.find();
+        Set<Complaint> complaints = this.complaintService.find("", "");
+
+        assertThat(complaints.isEmpty(), is(false));
+    }
+
+    @Test
+    @DisplayName("Should test find with state id and company name")
+    public void shouldTestFindAllWithStateIdAndCompanyName() {
+        when(this.stateService.findById(anyString()))
+                .thenReturn(getState());
+        when(this.complaintRepository.findAllByStateAndCompanyName(any(), anyString()))
+                .thenReturn(Sets.newHashSet(getComplaint()));
+
+        Set<Complaint> complaints = this.complaintService.find("1", "reclame");
 
         assertThat(complaints.isEmpty(), is(false));
     }
@@ -65,11 +106,8 @@ public class ComplaintServiceTest {
     @Test
     @DisplayName("Should test delete")
     public void shouldTestDelete() {
-        Complaint complaint = new Complaint();
-        complaint.setId("1");
-        complaint.setCompanyName("American");
         when(this.complaintRepository.findById(anyString()))
-                .thenReturn(Optional.of(complaint));
+                .thenReturn(Optional.of(getComplaint()));
 
         this.complaintService.delete("1");
 
@@ -82,7 +120,7 @@ public class ComplaintServiceTest {
         when(this.complaintRepository.findById(anyString()))
                 .thenReturn(Optional.empty());
 
-        assertThrows(ComplaintPreConditionException.class, () ->  this.complaintService.update(new Complaint(), "1"));
+        assertThrows(ComplaintPreConditionException.class, () -> this.complaintService.update(Complaint.builder().build(), "1"));
 
         verify(this.complaintRepository, never()).save(any());
     }
@@ -90,13 +128,12 @@ public class ComplaintServiceTest {
     @Test
     @DisplayName("Should test update")
     public void shouldTestUpdate() {
-        Complaint complaint = new Complaint();
-        complaint.setId("1");
-        complaint.setCompanyName("American");
         when(this.complaintRepository.findById(anyString()))
-                .thenReturn(Optional.of(complaint));
+                .thenReturn(Optional.of(getComplaint()));
+        when(this.stateService.findById(anyString()))
+                .thenReturn(getState());
 
-        this.complaintService.update(new Complaint(), "2");
+        this.complaintService.update(getComplaint(), "2");
 
         verify(this.complaintRepository, atLeastOnce()).save(any());
     }
@@ -111,18 +148,34 @@ public class ComplaintServiceTest {
     }
 
     @Test
-    @DisplayName("Should test findAll")
-    public void shouldTestFind() {
-        Complaint complaint = new Complaint();
-        complaint.setId("1");
-        complaint.setCompanyName("American");
+    @DisplayName("Should test find by id")
+    public void shouldTestFindById() {
         when(this.complaintRepository.findById(anyString()))
-                .thenReturn(Optional.of(complaint));
+                .thenReturn(Optional.of(getComplaint()));
 
-        Complaint complaintFind = this.complaintService.findbyId(anyString());
+        Complaint complaint = this.complaintService.findbyId(anyString());
 
-        assertNotNull(complaintFind);
-        assertEquals("1", complaintFind.getId());
-        assertEquals("American", complaintFind.getCompanyName());
+        assertNotNull(complaint);
+        assertEquals("1", complaint.getId());
+        assertEquals("title", complaint.getTitle());
+        assertEquals("description", complaint.getDescription());
+        assertEquals("company name", complaint.getCompanyName());
+    }
+
+    private Complaint getComplaint() {
+        return Complaint.builder()
+                .id("1")
+                .title("title")
+                .description("description")
+                .state(State.builder().id("1").build())
+                .companyName("company name")
+                .build();
+    }
+
+    private State getState() {
+        return State.builder()
+                .id("1")
+                .name("SP")
+                .build();
     }
 }

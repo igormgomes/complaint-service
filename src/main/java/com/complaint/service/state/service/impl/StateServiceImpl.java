@@ -6,7 +6,6 @@ import com.complaint.service.state.model.State;
 import com.complaint.service.state.repository.StateRepository;
 import com.complaint.service.state.service.StateService;
 import org.assertj.core.util.Sets;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +14,8 @@ import java.util.Set;
 @Service
 class StateServiceImpl implements StateService {
 
-    private StateRepository stateRepository;
+    private final StateRepository stateRepository;
 
-    @Autowired
     public StateServiceImpl(StateRepository stateRepository) {
         this.stateRepository = stateRepository;
     }
